@@ -4,8 +4,10 @@ import {
     set,
     onDisconnect,
     get,
+    onValue,
 } from 'firebase/database';
 import app from './initApp';
+import { listUsers } from './helpers';
 
 const db = getDatabase(app);
 
@@ -32,4 +34,11 @@ export const getUsers = async () => {
     const usersRef = ref(db, '/users');
     const result = await get(usersRef);
     return result.val();
+};
+
+export const observeUsers = (uid) => {
+    onValue(ref(db, '/users'), (result) => {
+        const users = result.val();
+        listUsers(users, uid);
+    });
 };

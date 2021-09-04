@@ -3,9 +3,8 @@ import {
 } from 'firebase/auth';
 import app from './initApp';
 import {
-    addUser, getUsers, handleDisconnection, setStatus,
+    addUser, handleDisconnection, setStatus, observeUsers,
 } from './db';
-import { listUsers } from './helpers';
 
 const auth = getAuth(app);
 const welcome = document.querySelector('#welcome');
@@ -40,8 +39,7 @@ const signOutHandler = async () => {
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         await setStatus(user.uid, true);
-        const users = await getUsers();
-        listUsers(users, user.uid);
+        observeUsers(user.uid);
         handleDisconnection(user.uid);
         welcome.classList.add('d-none');
         chat.classList.remove('d-none');
