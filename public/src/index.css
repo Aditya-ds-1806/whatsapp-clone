@@ -5,6 +5,12 @@ body {
     background-color: black;
 }
 
+.circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
 .text-green {
     color: #39ff14 !important;
 }
