@@ -3,6 +3,7 @@ import {
     ref,
     set,
     onDisconnect,
+    get,
 } from 'firebase/database';
 import app from './initApp';
 
@@ -25,4 +26,10 @@ export const handleDisconnection = (uid) => {
 export const setStatus = (uid, status = true) => {
     const statusRef = ref(db, `/users/${uid}/online`);
     return set(statusRef, status);
+};
+
+export const getUsers = async () => {
+    const usersRef = ref(db, '/users');
+    const result = await get(usersRef);
+    return result.val();
 };
