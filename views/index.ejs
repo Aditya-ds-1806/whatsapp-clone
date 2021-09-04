@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <header class="container d-flex flex-column justify-content-center align-items-center vh-100" id="welcome">
+    <section class="container d-flex flex-column justify-content-center align-items-center vh-100" id="welcome">
         <div class="text-center mb-5 py-5">
             <h1 class="display-1">PINGG.IO</h1>
         </div>
@@ -22,20 +22,28 @@
             <span class="visually-hidden">Loading...</span>
         </div>
         <button class="btn btn-lg btn-light border-0 bg-green rounded-0 d-none" id="signIn">Sign In</button>
-    </header>
-    <main class="container-fluid border border-dark border-2 px-0 vh-100 d-flex flex-column col-8 d-none" id="chat">
-        <main class="flex-fill px-3" id="messages">
+    </section>
+    <section class="d-flex flex-column vh-100 d-none" id="chat">
+        <nav class="navbar navbar-dark bg-dark p-2">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1 text-green">PINGG.IO</span>
+                <button class="btn bg-green">Sign Out</button>
+            </div>
+        </nav>
+        <main class="container-fluid border border-dark border-2 px-0 flex-fill col-8 d-flex flex-column">
+            <main class="flex-fill px-3" id="messages">
+            </main>
+            <footer class="flex-end">
+                <form class="">
+                    <div class="input-group">
+                        <input type="text" class="form-control-lg form-control rounded-0 bg-dark border-dark text-green"
+                            placeholder="Type something...">
+                        <button class="btn btn-light border-0 bg-green rounded-0" type="submit">Send</button>
+                    </div>
+                </form>
+            </footer>
         </main>
-        <footer>
-            <form>
-                <div class="input-group">
-                    <input type="text" class="form-control-lg form-control rounded-0 bg-dark border-dark text-green"
-                        placeholder="Type something...">
-                    <button class="btn btn-light border-0 bg-green rounded-0" type="submit">Send</button>
-                </div>
-            </form>
-        </footer>
-    </main>
+    </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
         integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
         crossorigin="anonymous"></script>
