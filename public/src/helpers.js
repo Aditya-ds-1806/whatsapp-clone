@@ -1,4 +1,4 @@
-export const createNewMessage = (text, alignLeft = true) => {
+export const createNewMessage = ({ chatId, message }, alignLeft = true) => {
     const div = document.createElement('div');
     const p = document.createElement('p');
     if (alignLeft) {
@@ -7,7 +7,8 @@ export const createNewMessage = (text, alignLeft = true) => {
         div.classList.add('bg-green', 'text-dark', 'my-3', 'py-2', 'px-3', 'w-75', 'rounded', 'ms-auto');
     }
     p.classList.add('mb-0');
-    p.textContent = text;
+    p.textContent = message;
+    div.id = chatId;
     div.append(p);
     return div;
 };
@@ -25,9 +26,10 @@ export const updateActiveChat = (currentUid) => {
     if (!activeChatUid) return;
     const activeConvId = [currentUid, activeChatUid].sort().join(':');
     const activeUidMessages = JSON.parse(localStorage.getItem(activeConvId));
-    messages.innerHTML = '';
-    Object.entries(activeUidMessages).forEach(([, { message, sender }]) => {
-        appendMessage(createNewMessage(message, sender !== currentUid));
+    Object.entries(activeUidMessages).forEach(([chatId, { message, sender }]) => {
+        if (!document.querySelector(`#messages #${chatId}`)) {
+            appendMessage(createNewMessage({ chatId, message }, sender !== currentUid));
+        }
     });
 };
 
