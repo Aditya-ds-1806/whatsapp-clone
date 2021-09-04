@@ -30,6 +30,7 @@ main header {
 #messages {
     overflow-y: auto;
     scroll-behavior: smooth;
+    height: 0;
 }
 
 #messages::-webkit-scrollbar {
