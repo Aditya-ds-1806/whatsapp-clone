@@ -12,7 +12,26 @@ export const createNewMessage = (text, alignLeft = true) => {
     return div;
 };
 
-export const createContact = (uid, { name, img, online }) => {
+export const appendMessage = (messageDiv) => {
+    const messages = document.querySelector('#messages');
+    messages.append(messageDiv);
+    document.querySelector('input').value = '';
+    messages.scrollTop = messages.scrollHeight;
+};
+
+export const updateActiveChat = (currentUid) => {
+    const messages = document.querySelector('#messages');
+    const activeChatUid = messages.dataset.uid;
+    if (!activeChatUid) return;
+    const activeConvId = [currentUid, activeChatUid].sort().join(':');
+    const activeUidMessages = JSON.parse(localStorage.getItem(activeConvId));
+    messages.innerHTML = '';
+    Object.entries(activeUidMessages).forEach(([, { message, sender }]) => {
+        appendMessage(createNewMessage(message, sender !== currentUid));
+    });
+};
+
+export const createContact = (uid, currentUid, { name, img, online }) => {
     const div = document.createElement('div');
     const image = document.createElement('img');
     const p = document.createElement('p');
@@ -28,6 +47,10 @@ export const createContact = (uid, { name, img, online }) => {
     p.classList.add('lead', 'mb-0', 'ms-3');
     span.classList.add(online ? 'bg-green' : 'bg-dark', 'circle', 'ms-auto');
     div.append(image, p, span);
+    div.addEventListener('click', () => {
+        document.querySelector('#messages').dataset.uid = uid;
+        updateActiveChat(currentUid);
+    });
     return div;
 };
 
@@ -35,7 +58,7 @@ export const listUsers = (users, currentUid) => {
     const usersDiv = document.querySelector('#users');
     usersDiv.innerHTML = '';
     Object.entries(users).forEach(([uid, user]) => {
-        if (uid !== currentUid) usersDiv.append(createContact(uid, user));
+        if (uid !== currentUid) usersDiv.append(createContact(uid, currentUid, user));
     });
 };
 
