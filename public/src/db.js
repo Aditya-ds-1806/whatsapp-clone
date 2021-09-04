@@ -5,9 +5,10 @@ import {
     onDisconnect,
     get,
     onValue,
+    push,
 } from 'firebase/database';
 import app from './initApp';
-import { listUsers } from './helpers';
+import { listUsers, updateActiveChat } from './helpers';
 
 const db = getDatabase(app);
 
@@ -41,4 +42,24 @@ export const observeUsers = (uid) => {
         const users = result.val();
         listUsers(users, uid);
     });
+};
+
+export const observeMessages = async (currentUid) => {
+    const users = await getUsers();
+    Object.keys(users).forEach((uid) => {
+        if (currentUid === uid) return;
+        const convId = [currentUid, uid].sort().join(':');
+        onValue(ref(db, `/chats/${convId}`), (result) => {
+            const messages = result.val();
+            localStorage.setItem(convId, JSON.stringify(messages));
+            updateActiveChat(currentUid);
+        });
+    });
+};
+
+export const addMessage = (data) => {
+    const { sender, receiver } = data;
+    const convId = [sender, receiver].sort().join(':');
+    const messageRef = ref(db, `/chats/${convId}`);
+    return push(messageRef, data);
 };
