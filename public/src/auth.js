@@ -57,6 +57,7 @@ const createContact = (uid, { name, img, online }) => {
 
 const listUsers = (users, currentUid) => {
     const usersDiv = document.querySelector('#users');
+    usersDiv.innerHTML = '';
     Object.entries(users).forEach(([uid, user]) => {
         if (uid !== currentUid) usersDiv.append(createContact(uid, user));
     });
@@ -64,7 +65,7 @@ const listUsers = (users, currentUid) => {
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
-        await setStatus(auth.currentUser.uid, true);
+        await setStatus(user.uid, true);
         const users = await getUsers();
         listUsers(users, user.uid);
         handleDisconnection(user.uid);
