@@ -30,19 +30,24 @@
                 <button class="btn bg-green" id="signOut">Sign Out</button>
             </div>
         </nav>
-        <main class="container-fluid border border-dark border-2 px-0 flex-fill col-8 d-flex flex-column">
-            <main class="flex-fill px-3" id="messages">
+        <div class="row flex-fill mx-0">
+            <aside class="px-0 flex-fill col-3 d-flex flex-column" id="users">
+            </aside>
+            <main class="border border-dark border-2 px-0 flex-fill col-9 d-flex flex-column">
+                <main class="flex-fill px-3" id="messages">
+                </main>
+                <footer class="flex-end">
+                    <form class="">
+                        <div class="input-group">
+                            <input type="text"
+                                class="form-control-lg form-control rounded-0 bg-dark border-dark text-green"
+                                placeholder="Type something...">
+                            <button class="btn btn-light border-0 bg-green rounded-0" type="submit">Send</button>
+                        </div>
+                    </form>
+                </footer>
             </main>
-            <footer class="flex-end">
-                <form class="">
-                    <div class="input-group">
-                        <input type="text" class="form-control-lg form-control rounded-0 bg-dark border-dark text-green"
-                            placeholder="Type something...">
-                        <button class="btn btn-light border-0 bg-green rounded-0" type="submit">Send</button>
-                    </div>
-                </form>
-            </footer>
-        </main>
+        </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
         integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
