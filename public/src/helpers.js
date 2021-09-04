@@ -38,3 +38,24 @@ export const listUsers = (users, currentUid) => {
         if (uid !== currentUid) usersDiv.append(createContact(uid, user));
     });
 };
+
+export const showWelcome = () => {
+    const welcome = document.querySelector('#welcome');
+    const chat = document.querySelector('#chat');
+    const signInBtn = document.querySelector('#signIn');
+    welcome.classList.remove('d-none');
+    chat.classList.add('d-none');
+    signInBtn.classList.remove('d-none');
+};
+
+export const showChat = () => {
+    const welcome = document.querySelector('#welcome');
+    const chat = document.querySelector('#chat');
+    welcome.classList.add('d-none');
+    chat.classList.remove('d-none');
+};
+
+export const hideSpinner = () => {
+    const spinner = document.querySelector('.spinner-border');
+    spinner.classList.add('d-none');
+};

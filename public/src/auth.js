@@ -5,11 +5,9 @@ import app from './initApp';
 import {
     addUser, handleDisconnection, setStatus, observeUsers,
 } from './db';
+import { hideSpinner, showChat, showWelcome } from './helpers';
 
 const auth = getAuth(app);
-const welcome = document.querySelector('#welcome');
-const chat = document.querySelector('#chat');
-const spinner = document.querySelector('.spinner-border');
 const signInBtn = document.querySelector('#signIn');
 const signOutBtn = document.querySelector('#signOut');
 
@@ -28,9 +26,7 @@ const signOutHandler = async () => {
     try {
         await setStatus(auth.currentUser.uid, false);
         await signOut(auth);
-        welcome.classList.remove('d-none');
-        chat.classList.add('d-none');
-        signInBtn.classList.remove('d-none');
+        showWelcome();
     } catch (error) {
         console.log(error);
     }
@@ -41,14 +37,11 @@ onAuthStateChanged(auth, async (user) => {
         await setStatus(user.uid, true);
         observeUsers(user.uid);
         handleDisconnection(user.uid);
-        welcome.classList.add('d-none');
-        chat.classList.remove('d-none');
+        showChat();
     } else {
-        welcome.classList.remove('d-none');
-        chat.classList.add('d-none');
-        signInBtn.classList.remove('d-none');
+        showWelcome();
     }
-    spinner.classList.add('d-none');
+    hideSpinner();
 });
 
 signInBtn.addEventListener('click', signInHandler);
