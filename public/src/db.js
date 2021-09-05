@@ -54,7 +54,7 @@ export const observeMessages = async (currentUid) => {
             const messages = result.val();
             localStorage.setItem(convId, JSON.stringify(messages));
             markMessagesStatus(messages, convId, currentUid, '1');
-            updateActiveChat(currentUid, markMessagesStatus);
+            updateActiveChat(currentUid);
         });
     });
 };
