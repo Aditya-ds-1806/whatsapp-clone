@@ -1,10 +1,12 @@
+const getCheck = () => `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>`;
+
 export const createNewMessage = ({ chatId, message, status }, alignLeft = true) => {
     const div = document.createElement('div');
     const p = document.createElement('p');
     const checks = document.createElement('p');
-    const check = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check">
-                        <polyline points="20 6 9 17 4 12"/>
-                    </svg>`;
+    const check = getCheck();
     if (alignLeft) {
         div.classList.add('bg-dark', 'my-3', 'py-2', 'px-3', 'w-75', 'rounded');
     } else {
@@ -46,8 +48,19 @@ export const updateActiveChat = (currentUid) => {
     }
     const activeUidMessages = JSON.parse(localStorage.getItem(activeConvId));
     Object.entries(activeUidMessages).forEach(([chatId, { message, sender, status }]) => {
-        if (!document.querySelector(`#messages #${chatId}`)) {
+        const chat = document.querySelector(`#messages #${chatId}`);
+        if (!chat) {
             appendMessage(createNewMessage({ chatId, message, status }, sender !== currentUid));
+            return;
+        }
+        const checks = chat.children[1];
+        if (!checks) return;
+        chat.dataset.status = status;
+        if (status === '1') {
+            checks.innerHTML = getCheck() + getCheck();
+        } else if (status === '2') {
+            checks.innerHTML = getCheck() + getCheck();
+            checks.classList.add('text-white');
         }
     });
 };
