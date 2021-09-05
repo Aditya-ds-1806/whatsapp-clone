@@ -2,7 +2,7 @@
   "name": "whatsappclone",
   "version": "1.0.0",
   "description": "A clone of WhatsApp with firebase backend",
-  "main": "app.js",
+  "main": "src/index.html",
   "scripts": {
     "start": "node app.js",
     "build": "webpack --mode=production --node-env=production",
@@ -12,14 +12,16 @@
   "author": "Aditya D.S.",
   "license": "ISC",
   "dependencies": {
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
     "firebase": "^9.0.1"
   },
   "devDependencies": {
+    "css-loader": "^6.2.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.24.2",
+    "mini-css-extract-plugin": "^2.2.2",
+    "sass": "^1.39.0",
+    "sass-loader": "^12.1.0",
     "webpack": "^5.52.0",
     "webpack-cli": "^4.8.0",
     "wepack-cli": "^0.0.1-security"
