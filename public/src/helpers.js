@@ -1,15 +1,23 @@
-export const createNewMessage = ({ chatId, message }, alignLeft = true) => {
+export const createNewMessage = ({ chatId, message, status }, alignLeft = true) => {
     const div = document.createElement('div');
     const p = document.createElement('p');
+    const checks = document.createElement('p');
+    const check = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>`;
     if (alignLeft) {
         div.classList.add('bg-dark', 'my-3', 'py-2', 'px-3', 'w-75', 'rounded');
     } else {
         div.classList.add('bg-green', 'text-dark', 'my-3', 'py-2', 'px-3', 'w-75', 'rounded', 'ms-auto');
+        checks.classList.add('mb-0', 'text-end');
+        checks.innerHTML = check + check;
     }
     p.classList.add('mb-0');
     p.textContent = message;
+    div.dataset.status = status;
     div.id = chatId;
     div.append(p);
+    if (!alignLeft) div.append(checks);
     return div;
 };
 
@@ -25,10 +33,14 @@ export const updateActiveChat = (currentUid) => {
     const activeChatUid = messages.dataset.uid;
     if (!activeChatUid) return;
     const activeConvId = [currentUid, activeChatUid].sort().join(':');
+    if (localStorage.getItem(activeConvId) === 'null') {
+        messages.innerHTML = '';
+        return;
+    }
     const activeUidMessages = JSON.parse(localStorage.getItem(activeConvId));
-    Object.entries(activeUidMessages).forEach(([chatId, { message, sender }]) => {
+    Object.entries(activeUidMessages).forEach(([chatId, { message, sender, status }]) => {
         if (!document.querySelector(`#messages #${chatId}`)) {
-            appendMessage(createNewMessage({ chatId, message }, sender !== currentUid));
+            appendMessage(createNewMessage({ chatId, message, status }, sender !== currentUid));
         }
     });
 };
