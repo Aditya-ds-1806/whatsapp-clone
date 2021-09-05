@@ -12,7 +12,7 @@ export const createNewMessage = ({ chatId, message, status }, alignLeft = true) 
     if (alignLeft) {
         div.classList.add('bg-dark', 'my-3', 'py-2', 'px-3', 'w-75', 'rounded');
     } else {
-        div.classList.add('bg-green', 'text-dark', 'my-3', 'py-2', 'px-3', 'w-75', 'rounded', 'ms-auto');
+        div.classList.add('bg-primary', 'text-dark', 'my-3', 'py-2', 'px-3', 'w-75', 'rounded', 'ms-auto');
         checks.classList.add('mb-0', 'text-end');
         if (status === '0') {
             checks.innerHTML = check;
@@ -82,7 +82,7 @@ export const createContact = (uid, currentUid, { name, img, online }) => {
     div.classList.add('d-flex', 'border', 'border-2', 'border-dark', 'p-3', 'align-items-center');
     image.classList.add('rounded-circle');
     p.classList.add('lead', 'mb-0', 'ms-3');
-    span.classList.add(online ? 'bg-green' : 'bg-dark', 'circle', 'ms-auto');
+    span.classList.add(online ? 'bg-primary' : 'bg-dark', 'circle', 'ms-auto');
     div.append(image, p, span);
     div.addEventListener('click', () => {
         if (document.querySelector('#messages').dataset.uid === uid) return;

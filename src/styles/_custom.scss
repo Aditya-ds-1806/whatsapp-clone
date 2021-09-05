@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+$primary: #39ff14;
+$body-color: #39ff14;
+$btn-border-radius: 0;
+$btn-border-radius-lg: 0;
+$body-bg: #000;
+$font-family-sans-serif: 'Zen Dots', cursive;
+
+.circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+#messages {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    height: 0;
+}
+
+#messages::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+#messages::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+#messages::-webkit-scrollbar-thumb {
+    background-color: #39ff14;
+    border-radius: 0.25em;
+}

@@ -6,8 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pingg.io</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/dist/index.css">
 </head>
 
@@ -19,13 +17,13 @@
         <div class="spinner-border" style="width: 5rem; height: 5rem;" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
-        <button class="btn btn-lg btn-light border-0 bg-green rounded-0 d-none" id="signIn">Sign In</button>
+        <button class="btn btn-lg btn-primary d-none" id="signIn">Sign In</button>
     </section>
     <section class="d-flex flex-column vh-100 d-none" id="chat">
-        <nav class="navbar navbar-dark bg-dark px-2 py-3">
+        <nav class="navbar navbar-dark bg-dark border-bottom border-2 border-primary px-2 py-3">
             <div class="container-fluid">
-                <span class="navbar-brand mb-0 h1 text-green">PINGG.IO</span>
-                <button class="btn bg-green rounded-0" id="signOut">Sign Out</button>
+                <span class="navbar-brand mb-0 h1 text-primary">PINGG.IO</span>
+                <button class="btn btn-primary" id="signOut">Sign Out</button>
             </div>
         </nav>
         <div class="row flex-fill mx-0">
@@ -34,13 +32,13 @@
             <main class="border border-dark border-2 px-0 flex-fill col-9 d-flex flex-column">
                 <main class="flex-fill px-3" id="messages">
                 </main>
-                <footer class="flex-end">
+                <footer class="flex-end border-top border-2 border-primary">
                     <form class="">
                         <div class="input-group">
                             <input type="text"
-                                class="form-control-lg form-control rounded-0 bg-dark border-dark text-green"
+                                class="form-control-lg form-control rounded-0 bg-dark border-dark text-primary"
                                 placeholder="Type something...">
-                            <button class="btn btn-light border-0 bg-green rounded-0" type="submit">Send</button>
+                            <button class="btn btn-primary" type="submit">Send</button>
                         </div>
                     </form>
                 </footer>
