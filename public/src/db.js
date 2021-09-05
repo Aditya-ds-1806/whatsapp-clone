@@ -6,6 +6,7 @@ import {
     get,
     onValue,
     push,
+    update,
 } from 'firebase/database';
 import app from './initApp';
 import { listUsers, updateActiveChat } from './helpers';
@@ -37,6 +38,16 @@ export const getUsers = async () => {
     return result.val();
 };
 
+export const markMessagesDelivered = (messages, convId, currentUid) => {
+    const updates = {};
+    Object.entries(messages).forEach(async ([chatId, { receiver, status }]) => {
+        if (receiver === currentUid && status === '0') {
+            updates[`${chatId}/status`] = '1';
+        }
+    });
+    return update(ref(db, `chats/${convId}`), updates);
+};
+
 export const observeUsers = (uid) => {
     onValue(ref(db, '/users'), (result) => {
         const users = result.val();
@@ -49,9 +60,10 @@ export const observeMessages = async (currentUid) => {
     Object.keys(users).forEach((uid) => {
         if (currentUid === uid) return;
         const convId = [currentUid, uid].sort().join(':');
-        onValue(ref(db, `/chats/${convId}`), (result) => {
+        onValue(ref(db, `/chats/${convId}`), async (result) => {
             const messages = result.val();
             localStorage.setItem(convId, JSON.stringify(messages));
+            markMessagesDelivered(messages, convId, currentUid);
             updateActiveChat(currentUid);
         });
     });
