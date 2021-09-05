@@ -12,6 +12,7 @@
   "author": "Aditya D.S.",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^5.1.0",
     "firebase": "^9.0.1"
   },
   "devDependencies": {
