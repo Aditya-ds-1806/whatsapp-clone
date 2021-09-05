@@ -1,6 +1,7 @@
 import './initApp';
 import getCurrentUser from './auth';
 import { addMessage } from './db';
+import '../styles/index.scss';
 
 const form = document.querySelector('form');
 
