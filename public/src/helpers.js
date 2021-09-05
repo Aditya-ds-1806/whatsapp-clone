@@ -85,6 +85,8 @@ export const createContact = (uid, currentUid, { name, img, online }) => {
     span.classList.add(online ? 'bg-green' : 'bg-dark', 'circle', 'ms-auto');
     div.append(image, p, span);
     div.addEventListener('click', () => {
+        if (document.querySelector('#messages').dataset.uid === uid) return;
+        document.querySelector('#messages').innerHTML = '';
         document.querySelector('#messages').dataset.uid = uid;
         updateActiveChat(currentUid);
     });
