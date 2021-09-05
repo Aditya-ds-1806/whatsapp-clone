@@ -10,7 +10,14 @@ export const createNewMessage = ({ chatId, message, status }, alignLeft = true) 
     } else {
         div.classList.add('bg-green', 'text-dark', 'my-3', 'py-2', 'px-3', 'w-75', 'rounded', 'ms-auto');
         checks.classList.add('mb-0', 'text-end');
-        checks.innerHTML = check + check;
+        if (status === '0') {
+            checks.innerHTML = check;
+        } else if (status === '1') {
+            checks.innerHTML = check + check;
+        } else {
+            checks.innerHTML = check + check;
+            checks.classList.add('text-white');
+        }
     }
     p.classList.add('mb-0');
     p.textContent = message;
